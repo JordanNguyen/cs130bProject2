@@ -14,10 +14,8 @@ int main(int argc, char *argv[]) {
 	
 	std::vector<stringPair> pairs;
 	pairs = getStrings();
-	// for (int i = 0; i < pairs.size(); i++)
-	// 	pairs[i].toString();
-
-	
+	for (int i = 0; i < pairs.size(); i++)
+		lcs(pairs[i]);
 
 	return 0;
 }
