@@ -16,7 +16,7 @@
 std::vector<stringPair> getStrings() {
 
 	std::vector<stringPair> myVector;
-
+ 	
 	std::string line;
 	std::getline(std::cin, line);
 	std::istringstream iss(line);
