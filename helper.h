@@ -11,11 +11,11 @@
 #include <iomanip>
 #include <algorithm>
 #include <set>
-#include "stringPair.h"
+#include "tuple.h"
 
-std::vector<stringPair> getStrings() {
+std::vector<tuple<std::string>> getStrings() {
 
-	std::vector<stringPair> myVector;
+	std::vector<tuple<std::string>> myVector;
  	
 	std::string line;
 	std::getline(std::cin, line);
@@ -31,14 +31,14 @@ std::vector<stringPair> getStrings() {
 		std::string second;
 		check >> first >> second;
 
-		myVector.push_back(stringPair(first,second));
+		myVector.push_back(tuple<std::string>(first,second));
 
 	}
 
 	return myVector;
 }
 
-void lcs(stringPair strings) {
+void lcs(tuple<std::string> strings) {
 
 	int m = strings.s1.length(); //rows
 	int n = strings.s2.length(); //columns
