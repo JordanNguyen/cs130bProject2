@@ -14,8 +14,14 @@ int main(int argc, char *argv[]) {
 	
 	std::vector<tuple<std::string>> pairs;
 	pairs = getStrings();
-	for (int i = 0; i < pairs.size(); i++)
-		lcs(pairs[i]);
+	std::string all = "-all";
+	if (argc > 1 && argv[1] == all)
+		std::cout<<"not implemented yet."<<std::endl;
+	else
+	{
+		for (int i = 0; i < pairs.size(); i++)
+			lcs(pairs[i]);
+	}
 
 	return 0;
 }
