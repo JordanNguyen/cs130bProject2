@@ -139,9 +139,6 @@ void backtrackLCS(int **L, int i, int j, tuple<std::string> strings, std::vector
     //std::cout<<"going up"<<std::endl;
     backtrackLCS(L, i-1, j, strings, indices, max); //go up
   }
-  
-
-  
 }
 
 void lcsALL(tuple<std::string> strings) {
