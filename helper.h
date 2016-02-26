@@ -14,7 +14,7 @@
 #include "tuple.h"
 
 //global set
-std::set<std::vector<tuple<int>>> abcd;
+std::set<std::vector<tuple<int>>> lcsIndices;
 
 /* parse input strings */
 std::vector<tuple<std::string>> getStrings() {
@@ -97,10 +97,10 @@ void lcs(tuple<std::string> strings) {
 }
 
 void printSet() {
-	//int size = abcd.size();
+	//int size = lcsIndices.size();
 	std::cout<<"entering print\n";
-	std::set<std::vector<tuple<int>>>::iterator it = abcd.begin();
-	for (it = abcd.begin(); it != abcd.end(); it++)
+	std::set<std::vector<tuple<int>>>::iterator it = lcsIndices.begin();
+	for (it = lcsIndices.begin(); it != lcsIndices.end(); it++)
 	{	
 		std::cout << "(";
 		for (int j = it->size()-1 ; j >= 0; j--) {
@@ -138,12 +138,12 @@ void backtrackLCS(int **L, int i, int j, tuple<std::string> strings, std::vector
  //      return;
     
  //  }
-	std::cout<< "i: " << i << " j: " << j <<  std::endl;
+	//std::cout<< "i: " << i << " j: " << j <<  std::endl;
 
 	if (L[i][j] == 0 || i == 0 || j == 0) {
 		if (indices.size() == max)
 		{
-			abcd.insert(indices);
+			lcsIndices.insert(indices);
 			//printSet();
 			return;
 		}
@@ -215,9 +215,9 @@ void lcsALL(tuple<std::string> strings) {
 	std::vector<tuple<int>> indices; //create blank vector to hold the indices of letters
 	backtrackLCS(L, m, n, strings, indices, L[m][n]);
 	printSet();
-	abcd.clear();
+	lcsIndices.clear();
 	return;
-	//std::set<vector<tuple<int>>> abcd
+	//std::set<vector<tuple<int>>> lcsIndices
 	//for (int i )
 
 }
