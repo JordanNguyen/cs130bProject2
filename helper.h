@@ -98,7 +98,7 @@ void lcs(tuple<std::string> strings) {
 
 void printSet() {
 	//int size = lcsIndices.size();
-	std::cout<<"entering print\n";
+	//std::cout<<"entering print\n";
 	std::set<std::vector<tuple<int>>>::iterator it = lcsIndices.begin();
 	for (it = lcsIndices.begin(); it != lcsIndices.end(); it++)
 	{	
@@ -140,6 +140,7 @@ void backtrackLCS(int **L, int i, int j, tuple<std::string> strings, std::vector
  //  }
 	//std::cout<< "i: " << i << " j: " << j <<  std::endl;
 
+  
 	if (L[i][j] == 0 || i == 0 || j == 0) {
 		if (indices.size() == max)
 		{
