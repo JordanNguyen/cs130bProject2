@@ -13,6 +13,8 @@
 #include <set>
 #include "tuple.h"
 
+
+
 std::vector<tuple<std::string>> getStrings() {
 
 	std::vector<tuple<std::string>> myVector;
@@ -93,17 +95,18 @@ void backtrackLCS(int **L, int i, int j, tuple<std::string> strings, std::vector
 
   //std::cout<<"in the backtrack"<<std::endl;
 
-  if (L[i][j] == 0) {
+  if (L[i][j] == 0) {   
     if (indices.size() == max) {
-    std::cout << "(";
-    for (int i = indices.size()-1; i >= 0; i--) {
-      indices[i].toString();
-      if (i != 0)
-	std::cout<< ", ";
-      else
-	std::cout<< ")\n";
+      std::cout << "(";
+      for (int i = indices.size()-1; i >= 0; i--) {
+	indices[i].toString();
+	if (i != 0)
+	  std::cout<< ", ";
+	else
+	  std::cout<< ")\n";
+      }
+      return;
     }
-    return; }
     else
       return;
     
@@ -113,32 +116,35 @@ void backtrackLCS(int **L, int i, int j, tuple<std::string> strings, std::vector
     indices.push_back(tuple<int>(i,j));
     //std::cout<<"going diag"<<std::endl;
     backtrackLCS(L, i-1, j-1, strings, indices, max); //go diagonal
-    
-    if (L[i][j-1] >= L[i-1][j]) {
-      //std::cout<<"going left"<<std::endl;
-      indices.pop_back();
-      backtrackLCS(L, i, j-1, strings, indices, max); //go left
+
+    indices.pop_back();
+    if (L[i-1][j] >= L[i][j-1]) {
+      backtrackLCS(L, i-1, j, strings, indices, max); //go left
     }
     
   
-    else {
-      //std::cout<<"going up"<<std::endl;
-      indices.pop_back();
-      backtrackLCS(L, i-1, j, strings, indices, max); //go up
+    if (L[i][j-1] >= L[i-1][j]) {
+      backtrackLCS(L, i, j-1, strings, indices, max); //go up
     }
   }
 
-  
-  else if (L[i][j-1] >= L[i-1][j]) {
+  /* else if (L[i][j-1] == L[i-1][j]) { //go left and up */
+  /*   backtrackLCS(L, i, j-1, strings, indices, max); */
+  /*   backtrackLCS(L, i-1, j, strings, indices, max); */
+  //}
+  else
+    {
+  if (L[i-1][j] >= L[i][j-1]) {
     //std::cout<<"going left"<<std::endl;
-    backtrackLCS(L, i, j-1, strings, indices, max); //go left
+    backtrackLCS(L, i-1, j, strings, indices, max); //go left
   }
     
   
-  else {
+  if (L[i][j-1] >= L[i-1][j]) {
     //std::cout<<"going up"<<std::endl;
-    backtrackLCS(L, i-1, j, strings, indices, max); //go up
+    backtrackLCS(L, i, j-1, strings, indices, max); //go up
   }
+    }
 }
 
 void lcsALL(tuple<std::string> strings) {
