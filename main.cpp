@@ -16,12 +16,25 @@ int main(int argc, char *argv[]) {
 	pairs = getStrings();
 	std::string all = "-all";
 	if (argc > 1 && argv[1] == all)
-		std::cout<<"not implemented yet."<<std::endl;
+	  {
+	    for (int i = 0; i < pairs.size(); i++)
+	      { lcsALL(pairs[i]);
+		std::cout<<"\n";
+	      }
+	    //	    std::cout<<"not ready."<<std::endl;
+	  }
 	else
 	{
 		for (int i = 0; i < pairs.size(); i++)
 			lcs(pairs[i]);
 	}
+
+	// int **array;
+	// array = new int *[10];
+	// for (int i = 0; i < 10; i++)
+	//   array[i] = new int[10];
+	// array[0][0] = 10;
+	// std::cout<<array[0][0]<<std::endl;
 
 	return 0;
 }
