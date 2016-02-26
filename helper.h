@@ -13,6 +13,8 @@
 #include <set>
 #include "tuple.h"
 
+//global set
+std::set<std::vector<tuple<int>>> abcd;
 
 /* parse input strings */
 std::vector<tuple<std::string>> getStrings() {
@@ -94,6 +96,25 @@ void lcs(tuple<std::string> strings) {
 	std::cout << L[m][n] << " " << LCS << std::endl;
 }
 
+void printSet() {
+	//int size = abcd.size();
+	std::cout<<"entering print\n";
+	std::set<std::vector<tuple<int>>>::iterator it = abcd.begin();
+	for (it = abcd.begin(); it != abcd.end(); it++)
+	{	
+		std::cout << "(";
+		for (int j = it->size()-1 ; j >= 0; j--) {
+			it->at(j).toString();
+			if (j != 0)
+				std::cout<<", ";
+			else
+				std::cout<<")\n";
+		}
+	}
+
+	return;
+}
+
 /*recursive backtrack function to get all LCS indices
 takes in a 2d array, the current indices of i and j, the tuple of strings you are working on,
 the tuple of indices for where the letters match, and the length of the lcs
@@ -101,22 +122,34 @@ the tuple of indices for where the letters match, and the length of the lcs
 void backtrackLCS(int **L, int i, int j, tuple<std::string> strings, std::vector<tuple<int>> indices, int max) {
 
   //base case, only print if the number of indices tuples matches the length of the lcs
-  if (L[i][j] == 0) {   
-    if (indices.size() == max) {
-      std::cout << "(";
-      for (int i = indices.size()-1; i >= 0; i--) {
-	indices[i].toString();
-	if (i != 0)
-	  std::cout<< ", ";
-	else
-	  std::cout<< ")\n";
-      }
-      return;
-    }
-    else
-      return;
+ //  if (L[i][j] == 0) {   
+ //    if (indices.size() == max) {
+ //      std::cout << "(";
+ //      for (int i = indices.size()-1; i >= 0; i--) {
+	// indices[i].toString();
+	// if (i != 0)
+	//   std::cout<< ", ";
+	// else
+	//   std::cout<< ")\n";
+ //      }
+ //      return;
+ //    }
+ //    else
+ //      return;
     
-  }
+ //  }
+	std::cout<< "i: " << i << " j: " << j <<  std::endl;
+
+	if (L[i][j] == 0 || i == 0 || j == 0) {
+		if (indices.size() == max)
+		{
+			abcd.insert(indices);
+			//printSet();
+			return;
+		}
+		else
+			return;
+	}
 
   //if the letters match  
   if (strings.s1[i-1] == strings.s2[j-1]) {
@@ -181,6 +214,11 @@ void lcsALL(tuple<std::string> strings) {
 
 	std::vector<tuple<int>> indices; //create blank vector to hold the indices of letters
 	backtrackLCS(L, m, n, strings, indices, L[m][n]);
+	printSet();
+	abcd.clear();
+	return;
+	//std::set<vector<tuple<int>>> abcd
+	//for (int i )
 
 }
 
