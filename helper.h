@@ -13,7 +13,7 @@
 #include <set>
 #include "tuple.h"
 
-//global set
+//global set holding all the lcs indices
 std::set<std::vector<tuple<int>>> lcsIndices;
 
 /* parse input strings */
@@ -96,6 +96,7 @@ void lcs(tuple<std::string> strings) {
 	std::cout << L[m][n] << " " << LCS << std::endl;
 }
 
+/* iterates through the whole set and all the vectors in the set and prints out */
 void printSet() {
 	//int size = lcsIndices.size();
 	//std::cout<<"entering print\n";
@@ -121,31 +122,11 @@ the tuple of indices for where the letters match, and the length of the lcs
 */
 void backtrackLCS(int **L, int i, int j, tuple<std::string> strings, std::vector<tuple<int>> indices, int max) {
 
-  //base case, only print if the number of indices tuples matches the length of the lcs
- //  if (L[i][j] == 0) {   
- //    if (indices.size() == max) {
- //      std::cout << "(";
- //      for (int i = indices.size()-1; i >= 0; i--) {
-	// indices[i].toString();
-	// if (i != 0)
-	//   std::cout<< ", ";
-	// else
-	//   std::cout<< ")\n";
- //      }
- //      return;
- //    }
- //    else
- //      return;
-    
- //  }
-	//std::cout<< "i: " << i << " j: " << j <<  std::endl;
-
-  
+  //base case, only add to set if the number of indices tuples matches the length of the lcs
 	if (L[i][j] == 0 || i == 0 || j == 0) {
 		if (indices.size() == max)
 		{
 			lcsIndices.insert(indices);
-			//printSet();
 			return;
 		}
 		else
@@ -215,11 +196,9 @@ void lcsALL(tuple<std::string> strings) {
 
 	std::vector<tuple<int>> indices; //create blank vector to hold the indices of letters
 	backtrackLCS(L, m, n, strings, indices, L[m][n]);
-	printSet();
-	lcsIndices.clear();
+	printSet(); 					 //print the set of LCS indices
+	lcsIndices.clear();              //clear out the set for the next strings
 	return;
-	//std::set<vector<tuple<int>>> lcsIndices
-	//for (int i )
 
 }
 
